@@ -31,4 +31,10 @@ public class Color extends Vector3D{
         return (add(scale(new Vector3D(1.0, 1.0, 1.0), 1.0 - t),
                 scale(new Vector3D(0.5, 0.7, 1.0), t)));
     }
+
+    public void gammaCorrect() {
+        this.x = Math.sqrt(this.x);
+        this.y = Math.sqrt(this.y);
+        this.z = Math.sqrt(this.z);
+    }
 }

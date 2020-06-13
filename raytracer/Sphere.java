@@ -1,26 +1,21 @@
 package raytracer;
 
-import java.util.Random;
-
 /**
  * Sphere
  */
 public class Sphere implements Surface{
 
-    public final Color color;
     public final Vector3D center;
     public final double radius;
     public final Material material;
 
-    public Sphere(final Color color, final Vector3D center, final double r, Material m) {
+    public Sphere(final Vector3D center, final double r, Material m) {
         this.center = center;
         this.radius = r;
-        this.color = color;
         this.material = m;
     }
 
     public Sphere(final Sphere s) {
-        this.color = s.color;
         this.center = s.center;
         this.radius = s.radius;
         this.material = s.material;
