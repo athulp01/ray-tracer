@@ -1,4 +1,7 @@
 package raytracer;
+
+import java.util.Random;
+
 /**
  * Sphere
  */
@@ -7,17 +10,20 @@ public class Sphere implements Surface{
     public final Color color;
     public final Vector3D center;
     public final double radius;
+    public final Material material;
 
-    public Sphere(final Color color, final Vector3D center, final double r) {
+    public Sphere(final Color color, final Vector3D center, final double r, Material m) {
         this.center = center;
         this.radius = r;
         this.color = color;
+        this.material = m;
     }
 
     public Sphere(final Sphere s) {
         this.color = s.color;
         this.center = s.center;
         this.radius = s.radius;
+        this.material = s.material;
     }
 
     public HitDetails hit(final Ray r, double tMin, double tMax) {
@@ -27,6 +33,7 @@ public class Sphere implements Surface{
         final double c = Vector3D.dot(distVec, distVec) - (this.radius * this.radius);
         final double discriminant = b * b -  a * c;
         HitDetails ans = new HitDetails();
+        ans.material = this.material;
         if(discriminant > 0) {
             double t = (-b - Math.sqrt(discriminant)) / a;
             if(t < tMax && t > tMin) {
@@ -43,11 +50,16 @@ public class Sphere implements Surface{
                 return ans;
             }
         }
-        ans.t = Double.NaN;
-        ans.normal = null;
-        ans.point = null;
-        return ans;
+        return null;
+    }
 
+    static public Vector3D RandomPointInUnitSphere() {
+        Vector3D ans;
+        do {
+            ans = Vector3D.sub(Vector3D.scale(new Vector3D(Math.random(), Math.random(), Math.random()),
+                    2), new Vector3D(1,1,1));
+        }while(Math.pow(ans.length(), 2) >= 1.0);
+        return ans;
     }
     
 }

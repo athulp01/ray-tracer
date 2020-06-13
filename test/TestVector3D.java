@@ -48,10 +48,5 @@ public class TestVector3D {
         assertEquals(unit, Vector3D.unitVector(v1));
     }
     
-    @Test
-    public void testHitSphere() {
-        Sphere s = new Sphere(new Color(1,0,0), new Vector3D(0,0,-1), 0.9);
-        Ray r1 = new Ray(new Vector3D(0,0,0), new Vector3D(0.34578,0.234,-1));
-        Ray r2 = new Ray(new Vector3D(0,0,0), new Vector3D(1,4.2,-1));
-    }
+
 }

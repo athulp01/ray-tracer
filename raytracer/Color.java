@@ -16,12 +16,15 @@ public class Color extends Vector3D{
         (int)(this.y*255.99) + " " + (int)(this.z*255.99);
     }
 
-    static public Vector3D generateColor(final Ray r, final Surface surface) {
-        Surface.HitDetails detail = surface.hit(r, 0, Double.MAX_VALUE);
-        if(detail.point != null) {
-            detail.normal.add(new Vector3D(1,1,1));
-            detail.normal.scale(0.5);
-            return detail.normal;
+    static public Vector3D generateColor(final Ray r, final Surface surface, int depth) {
+        Surface.HitDetails detail = surface.hit(r, 0.001, Double.MAX_VALUE);
+        ScatteredRay scattered;
+        if(detail != null) {
+            if (depth < 50 && (scattered = detail.material.scatter(r, detail)) != null) {
+                return Vector3D.mul(generateColor(scattered, surface, depth+1), scattered.attenuation);
+            } else {
+                return new Vector3D(0,0,0);
+            }
         }
         final Vector3D unit = unitVector(r.direction());
         final double t = 0.5 * (unit.y + 1.0);

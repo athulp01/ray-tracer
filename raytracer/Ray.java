@@ -9,6 +9,11 @@ public class Ray {
         this.direction = direction;
     }
 
+    public Ray(Ray r) {
+        this.origin = r.origin;
+        this.direction = r.direction;
+    }
+
     public Vector3D origin() {return this.origin;}
     public Vector3D direction() {return this.direction;}
 

@@ -21,18 +21,16 @@ public class World implements Surface {
     @Override
     public HitDetails hit(Ray r, double tMin, double tMax) {
         HitDetails details = new HitDetails();
-        details.normal = null;
-        details.point = null;
-        details.t = Double.NaN;
         double closestHit = tMax;
         HitDetails tmp = null;
         for(Sphere s : objects) {
             tmp = s.hit(r, tMin, closestHit);
-            if(tmp.point != null) {
+            if(tmp != null) {
                 closestHit = tmp.t;
                 details = tmp;
             }
         }
+        if(closestHit == tMax) return null;
         return details;
     }
 }

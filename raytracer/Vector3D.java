@@ -64,6 +64,12 @@ public class Vector3D {
         this.z -= that.z;
     }
 
+    public void mul(Vector3D that) {
+        this.x *= that.x;
+        this.y *= that.y;
+        this.z *= that.z;
+    }
+
     public void scale(double factor) {
         this.x *= factor;
         this.y *= factor;
@@ -85,6 +91,12 @@ public class Vector3D {
     public static Vector3D scale(Vector3D v, double factor) {
         Vector3D res = new Vector3D(v);
         res.scale(factor);
+        return res;
+    }
+
+    public static Vector3D mul(Vector3D first, Vector3D second) {
+        Vector3D res = new Vector3D(first);
+        res.mul(second);
         return res;
     }
 

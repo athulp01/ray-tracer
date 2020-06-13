@@ -5,6 +5,7 @@ public interface Surface {
         double t;
         Vector3D point;
         Vector3D normal;
+        Material material;
     }
 
     /**
